@@ -1,7 +1,7 @@
 services:
   database:
-    image: 'postgres:16.11-alpine3.23' #versão do banco
-    environment: # Variaveis de ambiente do banco
-      POSTGRES_PASSWORD: 'local_password'
+    image: "postgres:16.11-alpine3.23" #versão do banco
+    env_file: #Lê as variaveis de ambiente do arquivo .env, os nomes delas tem que seguir a documentação para funcionar corretamente
+      - ../.env
     ports:
       - "5432:5432"
