@@ -2,6 +2,6 @@ services:
   database:
     image: "postgres:16.11-alpine3.23" #versão do banco
     env_file: #Lê as variaveis de ambiente do arquivo .env, os nomes delas tem que seguir a documentação para funcionar corretamente
-      - ../.env
+      - ../.env.development
     ports:
       - "5432:5432"
