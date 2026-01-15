@@ -1,4 +1,4 @@
-import database from "../../../../infra/database.js"
+import database from "infra/database.js"
 //Request: o que é mandando na requisição
 //Response: retorno da requisição
 
