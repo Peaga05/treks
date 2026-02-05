@@ -3,7 +3,7 @@ import database from "infra/database.js"
 //Request: o que é mandando na requisição
 //Response: retorno da requisição
 
-async function status(request, response) {
+export default async function status(request, response) {
   const updateAt = new Date().toISOString();
 
   const postgresVersionQuery = await database.query("SHOW server_version;")
@@ -31,5 +31,3 @@ async function status(request, response) {
     },
   });
 }
-
-export default status;
