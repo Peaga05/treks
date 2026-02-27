@@ -1,4 +1,4 @@
-import database from "infra/database.js"
+import database from "infra/database.js";
 
 //Request: o que é mandando na requisição
 //Response: retorno da requisição
@@ -6,8 +6,8 @@ import database from "infra/database.js"
 export default async function status(request, response) {
   const updateAt = new Date().toISOString();
 
-  const postgresVersionQuery = await database.query("SHOW server_version;")
-  const postgresVersion = postgresVersionQuery.rows[0].server_version;;
+  const postgresVersionQuery = await database.query("SHOW server_version;");
+  const postgresVersion = postgresVersionQuery.rows[0].server_version;
 
   const maxConnectionQuery = await database.query("SHOW max_connections;");
   const maxConnections = maxConnectionQuery.rows[0].max_connections;
@@ -15,7 +15,7 @@ export default async function status(request, response) {
   const databaseName = process.env.POSTGRES_DB;
   const usedConnectionQuery = await database.query({
     text: "SELECT COUNT(*)::int FROM pg_stat_activity WHERE datname = $1;",
-    values: [databaseName]
+    values: [databaseName],
   });
 
   const openConnection = usedConnectionQuery.rows[0].count;
@@ -27,7 +27,7 @@ export default async function status(request, response) {
         version: postgresVersion,
         max_connections: parseInt(maxConnections),
         open_connection: openConnection,
-      }
+      },
     },
   });
 }
