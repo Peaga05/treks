@@ -18,7 +18,9 @@ describe("GET api/v1/status", () => {
 
       expect(responseBody.dependencies.database.version).toEqual("16.11");
       expect(responseBody.dependencies.database.max_connections).toEqual(100);
-      expect(parseInt(responseBody.dependencies.database.open_connection)).toBe(1);
+      expect(parseInt(responseBody.dependencies.database.open_connection)).toBe(
+        1,
+      );
     });
   });
 });
