@@ -32,7 +32,7 @@ export default function StatusPage() {
       <>
         <p>Última atualização {updateAtText}</p>
         <hr />
-        <p>Database</p>
+        <h2>Database</h2>
         <p>Versão: {data.dependencies.database.version}</p>
         <p>Conexões Abertas: {data.dependencies.database.open_connection}</p>
         <p>Conexões Máximas: {data.dependencies.database.max_connections}</p>
