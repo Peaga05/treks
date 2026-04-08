@@ -1,6 +1,7 @@
 import migrationRunner from "node-pg-migrate";
 import { resolve } from "node:path";
 import database from "infra/database";
+import { ServiceError } from "infra/errors";
 
 const defaultMigrationOptions = {
   dryRun: true, //Roda no modo dry - apenas retornar as migrations que rodariam
@@ -21,6 +22,12 @@ async function listPendingMigrations() {
     });
 
     return pendingMigrations;
+  } catch (error) {
+    const serviceErrorObject = new ServiceError({
+      message: "Erro ao listar as migrations",
+      cause: error,
+    });
+    throw serviceErrorObject;
   } finally {
     await dbClient?.end();
   }
@@ -38,6 +45,12 @@ async function runPendingMigrations() {
     });
 
     return migratedMigrations;
+  } catch (error) {
+    const serviceErrorObject = new ServiceError({
+      message: "Erro ao rodar as migrations",
+      cause: error,
+    });
+    throw serviceErrorObject;
   } finally {
     await dbClient?.end();
   }
